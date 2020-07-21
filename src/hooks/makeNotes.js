@@ -8,8 +8,21 @@ export default () => {
   const makeNote = async (note) => {
     console.log(note);
     try {
-      const newNote = axios.post("http://localhost:3000/notes", {
-        text: note,
+      const newNote = axios({
+        method: "POST",
+        url: "http://localhost:3000/notes",
+        data: {
+          data: {
+            type: "notes",
+            attributes: {
+              text: note,
+            },
+          },
+        },
+        headers: {
+          Accept: "application/vnd.api+json",
+          "Content-Type": "application/vnd.api+json",
+        },
       });
     } catch (err) {
       setErrorMakeNoteMessage("Something went wrong");
