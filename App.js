@@ -1,17 +1,35 @@
+import React from "react";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import HomeScreen from "./src/screens/HomeScreen";
+import IndexScreen from "./src/screens/IndexScreen";
+import { Provider } from "./src/context/BlogContext";
+import ShowScreen from "./src/screens/ShowScreen";
+import CreateScreen from "./src/screens/CreateScreen";
+import EditScreen from "./src/screens/EditScreen";
 
 const navigator = createStackNavigator(
   {
     Home: HomeScreen,
+    Index: IndexScreen,
+    Show: ShowScreen,
+    Create: CreateScreen,
+    Edit: EditScreen,
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Index",
     defaultNavigationOptions: {
-      title: "My Notes App",
+      title: "Blogs and stuff",
     },
   }
 );
 
-export default createAppContainer(navigator);
+const App = createAppContainer(navigator);
+
+export default () => {
+  return (
+    <Provider>
+      <App />
+    </Provider>
+  );
+};
