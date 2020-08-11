@@ -6,7 +6,6 @@ export default () => {
   const [errorMakeNoteMessage, setErrorMakeNoteMessage] = useState("");
 
   const makeNote = async (note) => {
-    console.log(note);
     try {
       const newNote = axios({
         method: "POST",

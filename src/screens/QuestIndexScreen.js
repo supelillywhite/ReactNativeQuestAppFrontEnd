@@ -7,17 +7,17 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { Context } from "../context/BlogContext";
+import { Context } from "../context/QuestContext";
 import { Feather } from "@expo/vector-icons";
 
-const IndexScreen = ({ navigation }) => {
-  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
+const QuestIndexScreen = ({ navigation }) => {
+  const { state, deleteQuest, getQuests } = useContext(Context);
 
   useEffect(() => {
-    getBlogPosts();
+    getQuests();
 
     const listener = navigation.addListener("didFocus", () => {
-      getBlogPosts();
+      getQuests();
     });
 
     return () => {
@@ -27,31 +27,19 @@ const IndexScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Button title="Home Screen" onPress={() => navigation.navigate("Home")} />
-      <Button
-        title="Quest Index Screen"
-        onPress={() => navigation.navigate("QuestIndex")}
-      />
-      <Button
-        title="Gear Index Screen"
-        onPress={() => navigation.navigate("GearIndex")}
-      />
       <FlatList
         data={state}
-        keyExtractor={(blogPost) => blogPost.id}
+        keyExtractor={(quest) => quest.id}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate("Show", { id: item.id })}
+              onPress={() => navigation.navigate("QuestShow", { id: item.id })}
             >
               <View style={styles.row}>
                 <Text style={styles.title}>
-                  {item.hasOwnProperty("attributes") === true
-                    ? item.attributes.title
-                    : item.title}{" "}
-                  - {item.id}
+                  {item.title} - {item.id}
                 </Text>
-                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                <TouchableOpacity onPress={() => deleteQuest(item.id)}>
                   <Feather style={styles.icon} name="trash" />
                 </TouchableOpacity>
               </View>
@@ -63,10 +51,10 @@ const IndexScreen = ({ navigation }) => {
   );
 };
 
-IndexScreen.navigationOptions = ({ navigation }) => {
+QuestIndexScreen.navigationOptions = ({ navigation }) => {
   return {
     headerRight: () => (
-      <TouchableOpacity onPress={() => navigation.navigate("Create")}>
+      <TouchableOpacity onPress={() => navigation.navigate("QuestCreate")}>
         <Feather name="plus" size={30} />
       </TouchableOpacity>
     ),
@@ -90,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IndexScreen;
+export default QuestIndexScreen;

@@ -11,7 +11,16 @@ const EditScreen = ({ navigation }) => {
 
   return (
     <BlogPostForm
-      initialValues={{ title: blogPost.title, content: blogPost.content }}
+      initialValues={{
+        title:
+          blogPost.hasOwnProperty("attributes") === true
+            ? blogPost.attributes.title
+            : blogPost.title,
+        content:
+          blogPost.hasOwnProperty("attributes") === true
+            ? blogPost.attributes.content
+            : blogPost.content,
+      }}
       onSubmit={(title, content) => {
         editBlogPost(id, title, content, () => navigation.pop());
       }}

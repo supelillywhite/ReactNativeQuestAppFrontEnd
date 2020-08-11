@@ -9,8 +9,6 @@ export default () => {
     try {
       const response = await axios.get("http://localhost:3000/notes");
       setNotes(response.data.data);
-      // console.log(response.data.data);
-      // console.log("heyo from here!");
     } catch (err) {
       setErrorMessage("Something went wrong");
     }
