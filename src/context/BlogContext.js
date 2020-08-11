@@ -1,6 +1,5 @@
 import createDataContext from "./createDataContext";
 import jsonServer from "../api/jsonServer";
-import axios from "axios";
 
 const blogReducer = (state, action) => {
   switch (action.type) {
@@ -57,8 +56,6 @@ const deleteBlogPost = (dispatch) => {
 
 const editBlogPost = (dispatch) => {
   return async (id, title, content, callback) => {
-    // await jsonServer.put(`/blogposts/${id}`, { title, content });
-
     await jsonServer({
       method: "PATCH",
       url: `/blogposts/${id}`,

@@ -8,7 +8,6 @@ const HomeScreen = () => {
   const [getNotes, notes, errorMessage] = useNotes();
   const [makeNote, errorMakeNoteMessage] = makeNotes();
   const [note, setNote] = useState("");
-  // console.log(notes);
 
   return (
     <View>
